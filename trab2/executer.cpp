@@ -16,35 +16,35 @@ void initialize_instruction_maps() {
     u_instruction_map = initialize_u_instruction_map();
 }
 
-int32_t generate_U_hash() {
+uint32_t generate_U_hash() {
     return opcode;
 }
 
-int32_t generate_R_hash() {
+uint32_t generate_R_hash() {
     return funct3 | (funct7 << 3);
 }
 
-int32_t generate_J_hash() {
+uint32_t generate_J_hash() {
     return opcode;
 }
 
-int32_t generate_S_hash() {
+uint32_t generate_S_hash() {
     return opcode | (funct3 << 7);
 }
 
-int32_t generate_B_hash() {
+uint32_t generate_B_hash() {
     return funct3;
 }
 
-int32_t generate_I_hash() {
-    int32_t hash = 0;
+uint32_t generate_I_hash() {
+    uint32_t hash = 0;
     hash |= opcode;
     hash |= funct3 << 7;
     hash |= funct7 << 10;
     return hash;
 }
 
-int32_t generate_hash(char instruction) {
+uint32_t generate_hash(char instruction) {
     switch(instruction) {
         case 'B':
             return generate_B_hash();
@@ -63,10 +63,13 @@ int32_t generate_hash(char instruction) {
     }
 }
 
-void execute_instruction(char instruction_format, int32_t hash) {
+void execute_instruction(char instruction_format, uint32_t hash) {
+    cout << "hash: ";
+    memory.printBinaryWord(hash); cout << endl;
+
     switch (instruction_format) {
     case 'I':
-        regs[rd] = r_instruction_map[hash](regs[rs1], imm);
+        regs[rd] = i_instruction_map[hash](regs[rs1], imm);
         break;
 
     case 'B':
@@ -95,11 +98,9 @@ void execute_instruction(char instruction_format, int32_t hash) {
 }
 
 void execute(char instruction_format) {
-    int32_t hash = generate_hash(instruction_format);
+    uint32_t hash = generate_hash(instruction_format);
 
     cout << "instruction format: " << instruction_format << endl;
-    cout << "hash: ";
-    memory.printBinaryWord(hash); cout << endl;
 
     execute_instruction(instruction_format, hash);
 }
