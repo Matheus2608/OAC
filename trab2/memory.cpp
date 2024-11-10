@@ -142,3 +142,7 @@ void Memory::sw(uint8_t reg, int32_t kte, int32_t word) {
     mem[idx + 2] = (word >> 16) & 0xFF;
     mem[idx + 3] = (word >> 24) & 0xFF;
 }
+
+void Memory::printHex(int32_t num) {
+    cout << "0x" << setfill('0') << setw(8) << hex << num << endl;
+}

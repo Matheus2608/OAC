@@ -31,6 +31,7 @@ public:
     int32_t lw(uint8_t reg, int32_t kte);
     void sb(uint8_t reg, int32_t kte, int8_t byte);
     void sw(uint8_t reg, int32_t kte, int32_t word);
+    void printHex(int32_t num);
 
 private:
     Memory() = default; // Construtor privado

@@ -65,11 +65,12 @@ uint32_t generate_hash(char instruction) {
 
 void execute_instruction(char instruction_format, uint32_t hash) {
     cout << "hash: ";
-    memory.printBinaryWord(hash); cout << endl;
+    memory.printBinaryWord(hash);
 
     switch (instruction_format) {
     case 'I':
         regs[rd] = i_instruction_map[hash](regs[rs1], imm);
+        cout << "rd = " << ((uint32_t) rd) << " and regs[rd] = "; memory.printHex(regs[rd]);
         break;
 
     case 'B':

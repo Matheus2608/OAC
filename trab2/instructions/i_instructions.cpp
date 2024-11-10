@@ -13,34 +13,34 @@
 #include "i_instructions.hpp"
 
 int32_t addi(int32_t rs1, int32_t imm) {
-    cout << "addi with rs1 = " << rs1 << " and imm = " << imm << endl;
+    cout << "addi with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
     return rs1 + imm;
 }
 
 
 int32_t andi(int32_t rs1, int32_t imm) {
-    cout << "andi with rs1 = " << rs1 << " and imm = " << imm << endl;
+    cout << "andi with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
     return rs1 & imm;
 }
 
 int32_t ori(int32_t rs1, int32_t imm) {
-    cout << "ori with rs1 = " << rs1 << " and imm = " << imm << endl;
+    cout << "ori with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
     return rs1 | imm;
 }
 
 int32_t srai(int32_t rs1, int32_t imm) {
-    cout << "srai with rs1 = " << rs1 << " and imm = " << imm << endl;
+    cout << "srai with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
 
     return rs1 >> imm;
 }
 
 int32_t slli(int32_t rs1, int32_t imm) {
-    cout << "slli with rs1 = " << rs1 << " and imm = " << imm << endl;
+    cout << "slli with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
     return rs1 << imm;
 }
 
 int32_t srli(int32_t rs1, int32_t imm) {
-    cout << "srli with rs1 = " << rs1 << " and imm = " << imm << endl;
+    cout << "srli with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
     uint8_t signal_bit = rs1 >> 31;
     rs1 = rs1 >> imm;
     if (signal_bit) {
@@ -52,7 +52,7 @@ int32_t srli(int32_t rs1, int32_t imm) {
 
 
 int32_t lb(int32_t rs1, int32_t imm) {
-    cout << "lb with rs1 = " << rs1 << " and imm = " << imm << endl;
+    cout << "lb with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
 
     regs[rd] = Memory::getInstance().lb(regs[rs1], imm);
 
@@ -60,7 +60,7 @@ int32_t lb(int32_t rs1, int32_t imm) {
 }
 
 int32_t lbu(int32_t rs1, int32_t imm) {
-    cout << "lbu with rs1 = " << rs1 << " and imm = " << imm << endl;
+    cout << "lbu with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
 
     regs[rd] = Memory::getInstance().lbu(regs[rs1], imm);
 
@@ -68,7 +68,7 @@ int32_t lbu(int32_t rs1, int32_t imm) {
 }
 
 int32_t lw(int32_t rs1, int32_t imm) {
-    cout << "lw with rs1 = " << rs1 << " and imm = " << imm << endl;
+    cout << "lw with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
 
     regs[rd] = Memory::getInstance().lw(regs[rs1], imm);
 
@@ -117,7 +117,7 @@ int32_t ecall(int32_t rs1, int32_t imm) {
             break;
     }
 
-    cout << "ecall" << endl;
+    cout << "ecall with a7 = " << reg_a7 << endl << endl;
     return 0;
 }
 

@@ -44,8 +44,9 @@ uint32_t parse_bits(uint8_t start, uint8_t end, uint32_t instruction) {
 void fetch() {
     ri = memory.lw(pc, 0);
     cout << "instruction = ";
-    memory.printBinaryWord(ri); cout << endl;
-    pc += 4;
+    memory.printBinaryWord(ri);
+
+    cout << "instruction = 0x" << setfill('0') << setw(8) << hex << ri << endl;
 }
 
 void step() {
