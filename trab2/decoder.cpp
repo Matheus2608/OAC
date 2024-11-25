@@ -44,11 +44,12 @@ void decode_B_format(uint32_t instruction) {
     funct3 = parse_bits(12, 14, instruction);
     rs1 = parse_bits(15, 19, instruction);
     rs2 = parse_bits(20, 24, instruction);
-    imm = parse_bits(8, 11, instruction);
-    imm |= parse_bits(25, 30, instruction) << 4;
-    imm |= parse_bits(7, 7, instruction) << 10;
-    imm |= parse_bits(31, 31, instruction) << 11;
-    imm = signExtend(imm, 12);
+
+    imm = (parse_bits(31, 31, instruction) << 12); // Bit de sinal (12)
+    imm |= (parse_bits(25, 30, instruction) << 5); // Bits 10:5
+    imm |= (parse_bits(11, 11, instruction) << 4); // Bit 4
+    imm |= (parse_bits(8, 10, instruction) << 1);  // Bits 3:1
+    imm |= (parse_bits(7, 7, instruction) << 11);  // Bit 11
 }
 
 void decode_shift_I_format(uint32_t instruction) {

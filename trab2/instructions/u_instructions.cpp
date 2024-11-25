@@ -5,14 +5,14 @@
 #include "u_instructions.hpp"
 
 uint32_t lui(int32_t imm) {
-    cout << "lui with imm = "; memory.printHex(imm); cout << endl;
+    // cout << "lui with imm = "; memory.printHex(imm); cout << endl;
 
     return imm << 12;
 
 }
 
 uint32_t auipc(int32_t imm) {
-    cout << "auipc with imm = "; memory.printHex(imm); cout << endl;
+    // cout << "auipc with imm = "; memory.printHex(imm); cout << endl;
 
     return pc - 4 + (imm << 12);
 }

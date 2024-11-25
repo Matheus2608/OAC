@@ -7,7 +7,7 @@
 using namespace std;
 
 void jal(int32_t idx_rd, int32_t idx_rs1, int32_t imm) {
-    cout << "jal with rd = "; memory.printHex(idx_rd); cout << "and imm = "; memory.printHex(imm); cout << endl;
+   //  cout << "jal with rd = "; memory.printHex(idx_rd); cout << "and imm = "; memory.printHex(imm); cout << endl;
     regs[rd] = pc;
     pc += (imm - 4) & (~1);
 }

@@ -35,10 +35,10 @@ int32_t regs[32];
 
 void printRegs(void) {
     for (int i = 0; i < 32; i++) {
-        cout << "reg " << dec << i << " = ";
+        //cout << "reg " << dec << i << " = ";
         memory.printHex(regs[i]);
     }
-    cout << endl;
+    //cout << endl;
 }
 
 // funcao auxiliar para extrair bits de uma instrucao
@@ -54,10 +54,10 @@ uint32_t parse_bits(uint8_t start, uint8_t end, uint32_t instruction) {
 
 void fetch() {
     ri = memory.lw(pc, 0);
-    cout << "instruction = ";
-    memory.printBinaryWord(ri);
+    //cout << "instruction = ";
+    //memory.printBinaryWord(ri);
 
-    cout << "instruction = 0x" << setfill('0') << setw(8) << hex << ri << endl;
+    //cout << "instruction = 0x" << setfill('0') << setw(8) << hex << ri << endl;
     pc += 4;
 }
 
@@ -70,18 +70,18 @@ void step() {
     char instruction_format = decode(ri);
     execute(instruction_format);
     clearRegister0();
-    printRegs();
+    // printRegs();
 }
 
 
 int main(int argc, char const *argv[]) {
     memory.readInstructions(code_file_name, data_file_name);
     initialize_instruction_maps();
-    for (int i = 0; i <= 25; i++) {
-        step();
-    }
+    // for (int i = 0; i <= 25; i++) {
+    //     step();
+    // }
 
-    // while (true) step();
+    while (true) step();
 
     // cout << "finished" << endl;
     // cout << memory.lw(0, 0x2024) << endl;

@@ -13,38 +13,38 @@
 #include "i_instructions.hpp"
 
 void common_print(int32_t rs1, int32_t imm) {
-    cout <<  " with rs1 = "; memory.printHex(rs1); cout << "and imm = "; memory.printHex(imm); cout << endl;
+    // cout <<  " with rs1 = "; memory.printHex(rs1); // cout << "and imm = "; memory.printHex(imm); // cout << endl;
 }
 
 int32_t addi(int32_t rs1, int32_t imm) {
-    cout << "addi"; common_print(rs1, imm);
+    // cout << "addi"; common_print(rs1, imm);
     return rs1 + imm;
 }
 
 
 int32_t andi(int32_t rs1, int32_t imm) {
-    cout << "andi"; common_print(rs1, imm);
+    // cout << "andi"; common_print(rs1, imm);
     return rs1 & imm;
 }
 
 int32_t ori(int32_t rs1, int32_t imm) {
-    cout << "ori"; common_print(rs1, imm);
+    // cout << "ori"; common_print(rs1, imm);
     return rs1 | imm;
 }
 
 int32_t srai(int32_t rs1, int32_t imm) {
-    cout << "srai"; common_print(rs1, imm);
+    // cout << "srai"; common_print(rs1, imm);
 
     return rs1 >> imm;
 }
 
 int32_t slli(int32_t rs1, int32_t imm) {
-    cout << "slli"; common_print(rs1, imm);
+    // cout << "slli"; common_print(rs1, imm);
     return rs1 << imm;
 }
 
 int32_t srli(int32_t rs1, int32_t imm) {
-    cout << "srli"; common_print(rs1, imm);
+    // cout << "srli"; common_print(rs1, imm);
     uint8_t signal_bit = rs1 >> 31;
     rs1 = rs1 >> imm;
     if (signal_bit) {
@@ -56,19 +56,19 @@ int32_t srli(int32_t rs1, int32_t imm) {
 
 
 int32_t lb(int32_t rs1, int32_t imm) {
-    cout << "lb"; common_print(rs1, imm);
+    // cout << "lb"; common_print(rs1, imm);
 
     return Memory::getInstance().lb(rs1, imm);
 }
 
 int32_t lbu(int32_t rs1, int32_t imm) {
-    cout << "lbu"; common_print(rs1, imm);
+    // cout << "lbu"; common_print(rs1, imm);
 
     return Memory::getInstance().lbu(rs1, imm);
 }
 
 int32_t lw(int32_t rs1, int32_t imm) {
-    cout << "lw"; common_print(rs1, imm);
+    // cout << "lw"; common_print(rs1, imm);
 
     return Memory::getInstance().lw(rs1, imm);
 }
@@ -78,7 +78,7 @@ void printInt(int32_t num) {
 }
 
 void printString(int32_t address) {
-    cout << "address = "; memory.printHex(address); cout << endl;
+    // cout << "address = "; memory.printHex(address); // cout << endl;
     string str = "";
     uint32_t idx = 0;
 
@@ -93,9 +93,9 @@ void printString(int32_t address) {
     cout << str;
 }
 
-void exitProgram(int32_t code) {
-    cout << "Program exited with code " << code << endl;
-    exit(code);
+void exitProgram(void) {
+    cout << endl << "Program exited with code " << 0 << endl;
+    exit(0);
 }
 
 int32_t ecall(int32_t rs1, int32_t imm) {
@@ -110,14 +110,14 @@ int32_t ecall(int32_t rs1, int32_t imm) {
             printString(reg_a1);
             break;
         case 10:
-            exitProgram(reg_a1);
+            exitProgram();
             break;
         default:
-            cout << "Invalid ecall code" << endl;
+            // cout << "Invalid ecall code" << endl;
             break;
     }
 
-    cout << "ecall with a7 = " << reg_a7 << endl << endl;
+    // cout << "ecall with a7 = " << reg_a7 << endl << endl;
     return 0;
 }
 
