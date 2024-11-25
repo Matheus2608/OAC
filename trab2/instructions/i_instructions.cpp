@@ -74,7 +74,7 @@ int32_t lw(int32_t rs1, int32_t imm) {
 }
 
 void printInt(int32_t num) {
-    cout << num << endl;
+    cout << num;
 }
 
 void printString(int32_t address) {
@@ -90,7 +90,7 @@ void printString(int32_t address) {
         idx++;
     }
 
-    cout << str << endl;
+    cout << str;
 }
 
 void exitProgram(int32_t code) {
