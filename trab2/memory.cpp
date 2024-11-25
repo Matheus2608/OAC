@@ -21,8 +21,8 @@ void Memory::readInstructions(string code_filename, string data_filename) {
     cout << "Code size: " << code_size << " bytes" << endl;
     cout << "Data size: " << data_size << " bytes" << endl;
 
-    if (code_size + data_size > MEM_SIZE) {
-        cerr << "Error: Combined file size exceeds memory size (" << MEM_SIZE << " bytes)" << endl;
+    if (code_size > 0x2000 || data_size > (MEM_SIZE - 0x2000)) {
+        cerr << "Error: Code or data size exceeds memory limits" << endl;
         std::exit(EXIT_FAILURE);
     }
 
@@ -33,7 +33,7 @@ void Memory::readInstructions(string code_filename, string data_filename) {
     }
 
     data_file.seekg(0, ios::beg);
-    if (!data_file.read(reinterpret_cast<char*>(mem + code_size), data_size)) {
+    if (!data_file.read(reinterpret_cast<char*>(mem + 0x2000), data_size)) {
         cerr << "Error: Failed to read file: " << data_filename << endl;
         std::exit(EXIT_FAILURE);
     }
@@ -78,21 +78,22 @@ void Memory::show_result_or_error(int32_t result) {
     errno = 0; // Reset errno para que nao seja impresso erro na proxima chamada
 }
 
-int32_t Memory::lb(uint8_t reg, int32_t kte) {
+int32_t Memory::lb(uint32_t reg, int32_t kte) {
     if (reg + kte >= MEM_SIZE) {
         errno = EINVAL; // Invalid argument
         return 0;
     }
 
     int8_t byte = mem[reg + kte];
-    bool positive = (byte & (1 << 7)) == 0;
 
+    bool positive = (byte & (1 << 7)) == 0;
+    // cout << "endereco = " ;printHex(reg + kte);
     if (positive)
         return 0x000000FF & byte;
     return 0xFFFFFF00 | byte;
 }
 
-int32_t Memory::lbu(uint8_t reg, int32_t kte) {
+int32_t Memory::lbu(uint32_t reg, int32_t kte) {
     if (reg + kte >= MEM_SIZE) {
         errno = EINVAL; // Invalid argument
         return 0;
@@ -102,7 +103,7 @@ int32_t Memory::lbu(uint8_t reg, int32_t kte) {
     return 0x000000FF & byte;
 }
 
-int32_t Memory::lw(uint8_t reg, int32_t kte) {
+int32_t Memory::lw(uint32_t reg, int32_t kte) {
     if (reg + kte + 3 >= MEM_SIZE || (reg + kte) % 4 != 0) {
         errno = EINVAL; // Invalid argument
         return 0;
@@ -121,7 +122,7 @@ int32_t Memory::lw(uint8_t reg, int32_t kte) {
     return ((uint8_t)byte4 << 24) | ((uint8_t)byte3 << 16) | ((uint8_t)byte2 << 8) | (uint8_t)byte1;
 }
 
-void Memory::sb(uint8_t reg, int32_t kte, int8_t byte) {
+void Memory::sb(uint32_t reg, int32_t kte, int8_t byte) {
     if (reg + kte >= MEM_SIZE) {
         errno = EINVAL; // Invalid argument
         return;
@@ -130,7 +131,7 @@ void Memory::sb(uint8_t reg, int32_t kte, int8_t byte) {
     mem[reg + kte] = byte;
 }
 
-void Memory::sw(uint8_t reg, int32_t kte, int32_t word) {
+void Memory::sw(uint32_t reg, int32_t kte, int32_t word) {
     if (reg + kte + 3 >= MEM_SIZE || (reg + kte) % 4 != 0) {
         errno = EINVAL; // Invalid argument
         return;

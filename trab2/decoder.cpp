@@ -12,7 +12,7 @@ void decode_s_format(uint32_t instruction) {
 
 void decode_u_format(uint32_t instruction) {
     rd = parse_bits(7, 11, instruction);
-    imm = parse_bits(12, 31, instruction) << 12;
+    imm = parse_bits(12, 31, instruction);
 }
 
 void decode_jalr(uint32_t instruction) {

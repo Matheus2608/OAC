@@ -26,11 +26,11 @@ public:
     void printBinaryWord(uint32_t word);
     string returnBit(uint32_t byte, uint32_t position);
     void show_result_or_error(int32_t result);
-    int32_t lb(uint8_t reg, int32_t kte);
-    int32_t lbu(uint8_t reg, int32_t kte);
-    int32_t lw(uint8_t reg, int32_t kte);
-    void sb(uint8_t reg, int32_t kte, int8_t byte);
-    void sw(uint8_t reg, int32_t kte, int32_t word);
+    int32_t lb(uint32_t reg, int32_t kte);
+    int32_t lbu(uint32_t reg, int32_t kte);
+    int32_t lw(uint32_t reg, int32_t kte);
+    void sb(uint32_t reg, int32_t kte, int8_t byte);
+    void sw(uint32_t reg, int32_t kte, int32_t word);
     void printHex(int32_t num);
 
 private:

@@ -12,35 +12,39 @@
 
 #include "i_instructions.hpp"
 
+void common_print(int32_t rs1, int32_t imm) {
+    cout <<  " with rs1 = "; memory.printHex(rs1); cout << "and imm = "; memory.printHex(imm); cout << endl;
+}
+
 int32_t addi(int32_t rs1, int32_t imm) {
-    cout << "addi with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
+    cout << "addi"; common_print(rs1, imm);
     return rs1 + imm;
 }
 
 
 int32_t andi(int32_t rs1, int32_t imm) {
-    cout << "andi with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
+    cout << "andi"; common_print(rs1, imm);
     return rs1 & imm;
 }
 
 int32_t ori(int32_t rs1, int32_t imm) {
-    cout << "ori with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
+    cout << "ori"; common_print(rs1, imm);
     return rs1 | imm;
 }
 
 int32_t srai(int32_t rs1, int32_t imm) {
-    cout << "srai with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
+    cout << "srai"; common_print(rs1, imm);
 
     return rs1 >> imm;
 }
 
 int32_t slli(int32_t rs1, int32_t imm) {
-    cout << "slli with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
+    cout << "slli"; common_print(rs1, imm);
     return rs1 << imm;
 }
 
 int32_t srli(int32_t rs1, int32_t imm) {
-    cout << "srli with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
+    cout << "srli"; common_print(rs1, imm);
     uint8_t signal_bit = rs1 >> 31;
     rs1 = rs1 >> imm;
     if (signal_bit) {
@@ -52,27 +56,21 @@ int32_t srli(int32_t rs1, int32_t imm) {
 
 
 int32_t lb(int32_t rs1, int32_t imm) {
-    cout << "lb with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
+    cout << "lb"; common_print(rs1, imm);
 
-    regs[rd] = Memory::getInstance().lb(regs[rs1], imm);
-
-    return 0;
+    return Memory::getInstance().lb(rs1, imm);
 }
 
 int32_t lbu(int32_t rs1, int32_t imm) {
-    cout << "lbu with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
+    cout << "lbu"; common_print(rs1, imm);
 
-    regs[rd] = Memory::getInstance().lbu(regs[rs1], imm);
-
-    return 0;
+    return Memory::getInstance().lbu(rs1, imm);
 }
 
 int32_t lw(int32_t rs1, int32_t imm) {
-    cout << "lw with rs1 = " << rs1 << " and imm = " << imm << endl << endl;
+    cout << "lw"; common_print(rs1, imm);
 
-    regs[rd] = Memory::getInstance().lw(regs[rs1], imm);
-
-    return 0;
+    return Memory::getInstance().lw(rs1, imm);
 }
 
 void printInt(int32_t num) {
@@ -80,13 +78,15 @@ void printInt(int32_t num) {
 }
 
 void printString(int32_t address) {
+    cout << "address = "; memory.printHex(address); cout << endl;
     string str = "";
     uint32_t idx = 0;
-    char c = Memory::getInstance().lb(address, idx);
+
+    char c = (char) Memory::getInstance().lb(address, idx);
     idx++;
     while (c != '\0') {
         str += c;
-        c = Memory::getInstance().lb(address, idx);
+        c = (char) Memory::getInstance().lb(address, idx);;
         idx++;
     }
 
