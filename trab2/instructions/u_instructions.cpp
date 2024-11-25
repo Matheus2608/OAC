@@ -14,7 +14,7 @@ uint32_t lui(int32_t imm) {
 uint32_t auipc(int32_t imm) {
     cout << "auipc with imm = "; memory.printHex(imm); cout << endl;
 
-    return pc + (imm << 12);
+    return pc - 4 + (imm << 12);
 }
 
 unordered_map<uint32_t, function<int32_t(int32_t)>> initialize_u_instruction_map() {

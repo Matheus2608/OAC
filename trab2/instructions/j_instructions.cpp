@@ -7,13 +7,14 @@
 using namespace std;
 
 void jal(int32_t idx_rd, int32_t idx_rs1, int32_t imm) {
-    regs[rd] = pc + 4;
-    pc += imm;
+    cout << "jal with rd = "; memory.printHex(idx_rd); cout << "and imm = "; memory.printHex(imm); cout << endl;
+    regs[rd] = pc;
+    pc += (imm - 4) & (~1);
 }
 
 void jalr(int32_t idx_rd, int32_t idx_rs1, int32_t imm) {
-    regs[rd] = pc + 4;
-    pc = regs[rs1] + imm;
+    regs[rd] = pc;
+    pc = (regs[rs1] + imm) & (~1);
 }
 
 unordered_map<uint32_t, function<void(int32_t, int32_t, int32_t)>> initialize_j_instruction_map() {

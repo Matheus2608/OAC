@@ -2,12 +2,20 @@
 
 using namespace std;
 
+
+// Função genérica para extensão de sinal
+int32_t signExtend(int32_t immediate, int bits) {
+    int32_t mask = 1 << (bits - 1); // Bit de sinal na posição correta
+    return (immediate ^ mask) - mask; // Estende o sinal
+}
+
 void decode_s_format(uint32_t instruction) {
     funct3 = parse_bits(12, 14, instruction);
     rs1 = parse_bits(15, 19, instruction);
     rs2 = parse_bits(20, 24, instruction);
     imm = parse_bits(7, 11, instruction);
     imm |= parse_bits(25, 31, instruction) << 5;
+    imm = signExtend(imm, 12);
 }
 
 void decode_u_format(uint32_t instruction) {
@@ -18,18 +26,18 @@ void decode_u_format(uint32_t instruction) {
 void decode_jalr(uint32_t instruction) {
     rd = parse_bits(7, 11, instruction);
     rs1 = parse_bits(15, 19, instruction);
-    imm = parse_bits(21, 30, instruction);
-    imm |= parse_bits(20, 20, instruction) << 10;
-    imm |= parse_bits(12, 19, instruction) << 11;
-    imm |= parse_bits(31, 31, instruction) << 19;
+    imm = parse_bits(20, 31, instruction);
+    imm = signExtend(imm, 12);
 }
 
 void decode_jal(uint32_t instruction) {
     rd = parse_bits(7, 11, instruction);
-    imm = parse_bits(12, 19, instruction);
-    imm |= parse_bits(20, 20, instruction) << 11;
-    imm |= parse_bits(21, 30, instruction) << 1;
-    imm |= parse_bits(31, 31, instruction) << 20;
+
+    imm = (parse_bits(31, 31, instruction) << 20);  // Bit 20 (sinal)
+    imm |= (parse_bits(21, 30, instruction) << 1);  // Bits 10:1
+    imm |= (parse_bits(20, 20, instruction) << 11); // Bit 11
+    imm |= (parse_bits(12, 19, instruction) << 12); // Bits 19:12
+    imm = signExtend(imm, 21);
 }
 
 void decode_B_format(uint32_t instruction) {
@@ -40,6 +48,7 @@ void decode_B_format(uint32_t instruction) {
     imm |= parse_bits(25, 30, instruction) << 4;
     imm |= parse_bits(7, 7, instruction) << 10;
     imm |= parse_bits(31, 31, instruction) << 11;
+    imm = signExtend(imm, 12);
 }
 
 void decode_shift_I_format(uint32_t instruction) {
@@ -61,6 +70,7 @@ void decode_I_format(uint32_t instruction) {
     funct3 = parse_bits(12, 14, instruction);
     rs1 = parse_bits(15, 19, instruction);
     imm = parse_bits(20, 31, instruction);
+    imm = signExtend(imm, 12);
 
     // cout << "rd = "; memory.printBinaryWord(rd); cout << endl;
     // cout << "funct3 = "; memory.printBinaryWord(funct3); cout << endl;

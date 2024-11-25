@@ -58,13 +58,18 @@ void fetch() {
     memory.printBinaryWord(ri);
 
     cout << "instruction = 0x" << setfill('0') << setw(8) << hex << ri << endl;
+    pc += 4;
+}
+
+void clearRegister0(void) {
+    regs[0] = 0;
 }
 
 void step() {
     fetch();
     char instruction_format = decode(ri);
     execute(instruction_format);
-    pc += 4;
+    clearRegister0();
     printRegs();
 }
 

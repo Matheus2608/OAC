@@ -19,7 +19,7 @@ void Memory::readInstructions(string code_filename, string data_filename) {
     streamsize data_size = data_file.tellg();
 
     cout << "Code size: " << code_size << " bytes" << endl;
-    cout << "Data size: " << data_size << " bytes" << endl;
+    cout << "Data size: " << data_size << " bytes" << endl << endl;
 
     if (code_size > 0x2000 || data_size > (MEM_SIZE - 0x2000)) {
         cerr << "Error: Code or data size exceeds memory limits" << endl;

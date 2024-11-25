@@ -13,37 +13,37 @@
 
 void beq(int32_t reg1, int32_t reg2, int32_t imm) {
     if (reg1 == reg2) {
-        pc += imm;
+        pc += imm - 4;
     }
 }
 
 void bne(int32_t reg1, int32_t reg2, int32_t imm) {
     if (reg1 != reg2) {
-        pc += imm;
+        pc += imm - 4;
     }
 }
 
 void bge(int32_t reg1, int32_t reg2, int32_t imm) {
     if (reg1 >= reg2) {
-        pc += imm;
+        pc += imm - 4;
     }
 }
 
 void bgeu(int32_t reg1, int32_t reg2, int32_t imm) {
     if ((uint32_t) reg1 >= (uint32_t) reg2) {
-        pc += imm;
+        pc += imm - 4;
     }
 }
 
 void blt(int32_t reg1, int32_t reg2, int32_t imm) {
     if (reg1 < reg2) {
-        pc += imm;
+        pc += imm - 4;
     }
 }
 
 void bltu(int32_t reg1, int32_t reg2, int32_t imm) {
     if ((uint32_t) reg1 < (uint32_t) reg2) {
-        pc += imm;
+        pc += imm - 4;
     }
 }
 
