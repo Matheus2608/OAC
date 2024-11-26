@@ -9,9 +9,7 @@
 
 using namespace std;
 
-// constantes globais
-const string code_file_name = "code.bin";
-const string data_file_name = "data.bin";
+
 
 // variaveis globais
 Memory& memory = Memory::getInstance();
@@ -75,6 +73,10 @@ void step() {
 
 
 int main(int argc, char const *argv[]) {
+
+    const string code_file_name = argv[1];
+    const string data_file_name = argv[2];
+
     memory.readInstructions(code_file_name, data_file_name);
     initialize_instruction_maps();
     // for (int i = 0; i <= 25; i++) {
