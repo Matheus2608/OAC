@@ -53,10 +53,11 @@ void decode_B_format(uint32_t instruction) {
 }
 
 void decode_shift_I_format(uint32_t instruction) {
+    cout << "entrei no shift porra";
     rd = parse_bits(7, 11, instruction);
     funct3 = parse_bits(12, 14, instruction);
     rs1 = parse_bits(15, 19, instruction);
-    shamt = parse_bits(20, 24, instruction);
+    imm = parse_bits(20, 24, instruction);
     funct7 = parse_bits(25, 31, instruction);
 
     // cout << "rd = "; memory.printBinaryWord(rd); cout << endl;
@@ -72,11 +73,7 @@ void decode_I_format(uint32_t instruction) {
     rs1 = parse_bits(15, 19, instruction);
     imm = parse_bits(20, 31, instruction);
     imm = signExtend(imm, 12);
-    if (funct3 == 0b001 || funct3 == 0b101) {
-        funct7 = parse_bits(25, 31, instruction);
-    } else {
-        funct7 = 0;
-    }
+    funct7 = 0;
 
     // cout << "rd = "; memory.printBinaryWord(rd); cout << endl;
     // cout << "funct3 = "; memory.printBinaryWord(funct3); cout << endl;
