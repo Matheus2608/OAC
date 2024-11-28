@@ -13,7 +13,7 @@
 #include "i_instructions.hpp"
 
 void common_print(int32_t rs1, int32_t imm) {
-    // cout <<  " with rs1 = "; memory.printHex(rs1); // cout << "and imm = "; memory.printHex(imm); // cout << endl;
+    cout <<  " with rs1 = "; memory.printHex(rs1); cout << "and imm = "; memory.printHex(imm); // cout << endl;
 }
 
 int32_t addi(int32_t rs1, int32_t imm) {
@@ -33,18 +33,18 @@ int32_t ori(int32_t rs1, int32_t imm) {
 }
 
 int32_t srai(int32_t rs1, int32_t imm) {
-    // cout << "srai"; common_print(rs1, imm);
+    //cout << "srai"; common_print(rs1, imm);
 
     return rs1 >> imm;
 }
 
 int32_t slli(int32_t rs1, int32_t imm) {
-    // cout << "slli"; common_print(rs1, imm);
+    //cout << "slli"; common_print(rs1, imm);
     return rs1 << imm;
 }
 
 int32_t srli(int32_t rs1, int32_t imm) {
-    // cout << "srli"; common_print(rs1, imm);
+    //cout << "srli"; common_print(rs1, imm);
     uint8_t signal_bit = rs1 >> 31;
     rs1 = rs1 >> imm;
     if (signal_bit) {

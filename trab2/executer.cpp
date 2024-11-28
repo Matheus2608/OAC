@@ -38,6 +38,7 @@ uint32_t generate_B_hash() {
 
 uint32_t generate_I_hash() {
     uint32_t hash = 0;
+
     hash |= opcode;
     hash |= funct3 << 7;
     hash |= funct7 << 10;
@@ -65,7 +66,8 @@ uint32_t generate_hash(char instruction) {
 
 void execute_instruction(char instruction_format, uint32_t hash) {
     // cout << "hash: ";
-    //memory.printBinaryWord(hash);
+    // memory.printBinaryWord(hash);
+    // cout << "instruction_format: " << instruction_format << endl;
 
     switch (instruction_format) {
     case 'I':

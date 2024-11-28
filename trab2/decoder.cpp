@@ -72,6 +72,11 @@ void decode_I_format(uint32_t instruction) {
     rs1 = parse_bits(15, 19, instruction);
     imm = parse_bits(20, 31, instruction);
     imm = signExtend(imm, 12);
+    if (funct3 == 0b001 || funct3 == 0b101) {
+        funct7 = parse_bits(25, 31, instruction);
+    } else {
+        funct7 = 0;
+    }
 
     // cout << "rd = "; memory.printBinaryWord(rd); cout << endl;
     // cout << "funct3 = "; memory.printBinaryWord(funct3); cout << endl;

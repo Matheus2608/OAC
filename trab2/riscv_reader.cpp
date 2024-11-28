@@ -33,10 +33,10 @@ int32_t regs[32];
 
 void printRegs(void) {
     for (int i = 0; i < 32; i++) {
-        //cout << "reg " << dec << i << " = ";
+        cout << "reg " << dec << i << " = ";
         memory.printHex(regs[i]);
     }
-    //cout << endl;
+    cout << endl;
 }
 
 // funcao auxiliar para extrair bits de uma instrucao
