@@ -68,7 +68,7 @@ void step() {
     char instruction_format = decode(ri);
     execute(instruction_format);
     clearRegister0();
-    // printRegs();
+    //printRegs();
 }
 
 
@@ -83,7 +83,9 @@ int main(int argc, char const *argv[]) {
     //     step();
     // }
 
-    while (true) step();
+    while (true) {
+        step();
+    }
 
     // cout << "finished" << endl;
     // cout << memory.lw(0, 0x2024) << endl;

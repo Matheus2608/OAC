@@ -34,24 +34,18 @@ int32_t ori(int32_t rs1, int32_t imm) {
 
 int32_t srai(int32_t rs1, int32_t imm) {
     //cout << "srai"; common_print(rs1, imm);
-
     return rs1 >> imm;
 }
 
 int32_t slli(int32_t rs1, int32_t imm) {
     //cout << "slli"; common_print(rs1, imm);
-    return rs1 << imm;
+    uint32_t urs1 = (uint32_t) rs1; // Converte para unsigned para realizar o deslocamento lógico
+    return urs1 << imm; // Desloca logicamente e retorna
 }
 
 int32_t srli(int32_t rs1, int32_t imm) {
-    //cout << "srli"; common_print(rs1, imm);
-    uint8_t signal_bit = rs1 >> 31;
-    rs1 = rs1 >> imm;
-    if (signal_bit) {
-        uint32_t mask = ((1 << (imm + 1)) -1)  << (32 - imm);
-        rs1 = rs1 | mask;
-    }
-    return rs1 >> imm;
+    uint32_t urs1 = (uint32_t) rs1; // Converte para unsigned para realizar o deslocamento lógico
+    return urs1 >> imm; // Desloca logicamente e retorna
 }
 
 

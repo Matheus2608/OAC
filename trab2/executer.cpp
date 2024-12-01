@@ -84,7 +84,7 @@ void execute_instruction(char instruction_format, uint32_t hash) {
         break;
 
     case 'S':
-        s_instruction_map[hash](regs[rs1], imm, regs[rs2]);
+        s_instruction_map[hash](regs[rs1], regs[rs2], imm);
         break;
 
     case 'U':

@@ -10,7 +10,6 @@ void sb(int32_t rs1, int32_t rs2, int32_t imm) {
 }
 
 void sw(int32_t rs1, int32_t rs2, int32_t imm) {
-    uint32_t address = rs1 + imm;
     Memory::getInstance().sw(rs1, imm, rs2);
 }
 

@@ -53,7 +53,6 @@ void decode_B_format(uint32_t instruction) {
 }
 
 void decode_shift_I_format(uint32_t instruction) {
-    cout << "entrei no shift porra";
     rd = parse_bits(7, 11, instruction);
     funct3 = parse_bits(12, 14, instruction);
     rs1 = parse_bits(15, 19, instruction);

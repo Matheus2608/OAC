@@ -133,6 +133,9 @@ void Memory::sb(uint32_t reg, int32_t kte, int8_t byte) {
 
 void Memory::sw(uint32_t reg, int32_t kte, int32_t word) {
     if (reg + kte + 3 >= MEM_SIZE || (reg + kte) % 4 != 0) {
+        // cout << "DEU ERRO CABULOSO ------------------------------------------------------------------------------------------------------------------------------------" << endl;
+        // cout << "reg = " << reg << endl;
+        // cout << "kte = " << kte << endl;
         errno = EINVAL; // Invalid argument
         return;
     }
